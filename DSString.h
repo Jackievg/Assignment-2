@@ -1,15 +1,8 @@
-/*
- * This file should help you to create a minimal interface for your string class based on
- * a dynamically allocated char array. Note that c-strings use `\0` as a terminator symbol
- * but your class should store its length in a member variable. Do not use c-string functions
- * from <string.h> or <cstring> other than for conversion from a c-string.
- */
-
 #ifndef DSSTRING_H
 #define DSSTRING_H
 
 #include <iostream>
-
+#include <vector>
 class DSString
 {
 
@@ -30,8 +23,8 @@ public:
 
     // Rule of three is needed if dynamic memory allocation is used
     DSString(const DSString &);            // copy constructor
-    DSString &operator=(const DSString &); // copy assignment operator
     ~DSString();                           // destructor
+    DSString &operator=(const DSString &); // assignment operator
 
     // you can also implement the move versions for the big 5 (C+11)
 
@@ -46,7 +39,7 @@ public:
 
     /**
      * Standard relational operators to compare and order your strings.
-     * Feel free to add more.
+     * Feel free to add additional.
      **/
     bool operator==(const DSString &) const;
     bool operator<(const DSString &) const;
@@ -60,6 +53,7 @@ public:
      *    the substring
      * @return a DSString object containing the requested substring
      **/
+    std::vector<DSString> tokenization();
     DSString substring(size_t start, size_t numChars) const;
 
     /**
@@ -74,15 +68,15 @@ public:
      * contents of this object. Since data already has a `\0`
      * at the end of the string in DSString so you can just return a pointer to data.
      **/
-    const char *c_str() const;
+    char *c_str() const;
 
-    // a conversion to std::string would also be nice to have: string string() const;
+    // a conversion to std::string would also be nice: string string() const;
 
     /**
      * Overloaded stream insertion operator to print the contents of this
      * string to the output stream in the first argument. Remember:
-     * This operator needs to be implemented outside of the class (and outside the class
-     * namespace) as a friend because it operates on the stream and not the DSString object.
+     * This operator needs to be implemented outside of the class as
+     * a friend because it operates on the stream and not the DSString object.
      **/
     friend std::ostream &operator<<(std::ostream &, const DSString &);
 
