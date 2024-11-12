@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(Assignment2_sentiment)
+project(Assignment-2)
 
 set(CMAKE_CXX_STANDARD 17)
 # C++17 includes a library to work with the file system
@@ -31,9 +31,9 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 add_compile_options(-Wall -Wextra -pedantic)
 
 # Create the executable (s)
-add_executable(sentiment main.cpp DSString.cpp)
+add_executable( sentiment main.cpp DSString.cpp SentimentClassifier.cpp)
 
 add_executable(test_DSString test_DSString.cpp DSString.cpp)
 
 set(CMAKE_VERBOSE_MAKEFILE OFF)
-
+set(CMAKE_CXX_STANDARD 17)
