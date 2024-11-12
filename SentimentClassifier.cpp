@@ -1,9 +1,7 @@
 #include "SentimentClassifier.h"
 
 #include "DSString.h"
-// train
-// predict
-// test
+
 SentimentClassifier::SentimentClassifier() {
 
 }
@@ -51,7 +49,6 @@ void SentimentClassifier::train(const std::string& filename) {
                 }
             }
         }
-        //if word already exist:
             //if sentiment is positive, add value of +1, and cout +1
             //if sentiment is negative, subtract -1 value, and add count +1
         
@@ -118,12 +115,9 @@ void SentimentClassifier::checking(const std::string& sentimentFile) {
         DSString id = buffer;
         int testSenti = testingMap.find(id)->second;
             if(testSenti != sentiment) {
-            // if(testingMap.find(id)->second != sentiment) {
-            // if(testingMap[id] != sentiment) {
-                //insert to map only the wrong
-                // check.insert(std::make_pair(id,sentiment));
+    
                 check[id] = testSenti;
-                // check.insert(std::make_pair(id,sentiment));
+               
             } 
     }
     delete[] buffer;
@@ -139,8 +133,9 @@ void SentimentClassifier::result(const std::string& resultFile){
 }
 void SentimentClassifier::accuracy(const std::string&accuracyFile){
     float rate = 1 - ((float)check.size() / testingMap.size());
+    rate *= 100; // Convert to percentage
     std::ofstream file2(accuracyFile);
-    file2 << std::fixed << std::setprecision(3) << rate << '\n';
+    file2 << std::fixed << std::setprecision(3) << rate << "%" << '\n';
     for(auto& pair: check){
         if(pair.second == 4){
             //save to file2
