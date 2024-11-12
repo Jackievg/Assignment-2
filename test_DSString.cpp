@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <cassert>
 
 #include "DSString.h"
 
@@ -39,9 +40,8 @@ int main()
 
     // find strings
     for (const auto &s : strings)
-        std::cout
-            << s << "\n";
-
+        std::cout << s << "\n";
+        
     // find implements linear search
     std::cout << "found ddd: " << (std::find(strings.begin(), strings.end(), DSString("ddd")) != strings.end()) << "\n";
     std::cout << "found z: " << (std::find(strings.begin(), strings.end(), DSString("z")) != strings.end()) << "\n";
@@ -57,5 +57,24 @@ int main()
     std::cout << "found ddd: " << binary_search(strings.begin(), strings.end(), DSString("ddd")) << "\n";
     std::cout << "found z: " << binary_search(strings.begin(), strings.end(), DSString("z")) << "\n";
 
+    //--------------------
+
+    DSString tokTestEasy("I am a tweet object");
+    DSString tokTestAvg("I am a tweet object, look at me.");
+    DSString tokTestHard("I am a tweet  object,   look at me! #cool #fun");
+    std::vector<DSString> result1 = tokTestEasy.tokenization();
+    std::vector<DSString> result2 = tokTestAvg.tokenization();
+    std::vector<DSString> result3 = tokTestHard.tokenization();
+
+    assert(result1 == std::vector<DSString>({
+        "I", "am", "a", "tweet", "object"
+    })); 
+    
+    assert(result2 == std::vector<DSString>({
+        "I", "am", "a", "tweet", "object", "look", "at", "me"
+    }));
+    assert(result3 == std::vector<DSString>({
+        "I", "am", "a", "tweet", "object", "look", "at", "me", "cool", "fun"
+    }));
     return 0;
 }
