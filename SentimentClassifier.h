@@ -15,10 +15,11 @@ class SentimentClassifier
     public:
     std::vector<DSString> tweet;
     SentimentClassifier();
-    void train(char* filename);
-    void test(char* testfile);
-    void checking(char* sentimentFile);
-    void result(char* resultFile);
-    void accuracy(char* accuracyFile);
+    void train(const std::string& filename);
+    void test(const std::string& testfile);
+    void checking(const std::string& sentimentFile);
+    void result(const std::string& resultFile);
+    void accuracy(const std::string& accuracyFile);
 };
+
 #endif

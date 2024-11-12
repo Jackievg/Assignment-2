@@ -7,11 +7,10 @@
 SentimentClassifier::SentimentClassifier() {
 
 }
-void SentimentClassifier::train(char* filename) {
+void SentimentClassifier::train(const std::string& filename) {
     std::ifstream file(filename);
     if (!file.is_open()) {
-        // print error
-        std::cout << "fail to open file" << '\n';
+        std::cerr << "Failed to open training file: " << filename << std::endl;
         exit(1);
     }
     char* buffer = new char[1000];
@@ -60,11 +59,10 @@ void SentimentClassifier::train(char* filename) {
     delete[] buffer;
     file.close();
 }
-void SentimentClassifier::test(char* testfile){
+void SentimentClassifier::test(const std::string& testfile) {
     std::ifstream testFile(testfile);
     if (!testFile.is_open()) {
-        // print error
-        std::cout << "fail to open file" << '\n';
+        std::cerr << "Failed to open test file: " << testfile << '\n';
         exit(1);
     }
     char* buffer = new char[1000];
@@ -101,11 +99,10 @@ void SentimentClassifier::test(char* testfile){
     delete[] buffer;
     testFile.close();
 }
-void SentimentClassifier::checking(char* sentimentFile){
+void SentimentClassifier::checking(const std::string& sentimentFile) {
     std::ifstream sentiFile(sentimentFile);
     if (!sentiFile.is_open()) {
-        // print error
-        std::cout << "fail to open file" << '\n';
+        std::cerr << "Failed to open sentiment file: " << sentimentFile << '\n';
         exit(1);
     }
     char* buffer = new char[1000];
@@ -132,7 +129,7 @@ void SentimentClassifier::checking(char* sentimentFile){
     delete[] buffer;
     sentiFile.close();
 }
-void SentimentClassifier::result(char* resultFile){
+void SentimentClassifier::result(const std::string& resultFile){
     std::ofstream file1(resultFile);
     for (const std::pair<DSString, int>& itr : testingMap) {
         //save result to file1
@@ -140,7 +137,7 @@ void SentimentClassifier::result(char* resultFile){
     }
     file1.close();
 }
-void SentimentClassifier::accuracy(char* accuracyFile){
+void SentimentClassifier::accuracy(const std::string&accuracyFile){
     float rate = 1 - ((float)check.size() / testingMap.size());
     std::ofstream file2(accuracyFile);
     file2 << std::fixed << std::setprecision(3) << rate << '\n';
